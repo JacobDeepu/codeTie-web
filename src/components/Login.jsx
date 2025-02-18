@@ -24,9 +24,13 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res.data));
-      return navigate("/feed");
+      navigate("/feed");
     } catch (err) {
-      setError(err?.response?.data || "Something went wrong");
+      setError(
+        typeof err?.response?.data === "string"
+          ? err.response.data
+          : "Something went wrong"
+      );
     }
   };
 
@@ -78,7 +82,7 @@ const Login = () => {
               />
             </label>
           </div>
-          <p className="text-red-500">{error}</p>
+          {error && <p className="text-red-500 text-center">{String(error)}</p>}
           <div className="card-actions justify-center">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
