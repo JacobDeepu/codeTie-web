@@ -4,9 +4,9 @@ import Login from "./components/Login";
 import appStore from "./utils/appStore";
 import { Provider } from "react-redux";
 import Feed from "./components/Feed";
-import Modal from "./components/Error";
 import Profile from "./components/Profile";
 import UserCard from "./components/UserCard";
+import Connections from "./components/Connections";
 
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Body />}>
               <Route path="/feed" element={<Feed />} />
-              <Route path="/error" element={<Modal />} />
-              <Route path="/usercard" element={<UserCard/>} />
+              <Route path="/usercard" element={<UserCard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/connections" element={<Connections/>} />
               <Route path="/login" element={<Login />} />
             </Route>
           </Routes>

@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 
 const UserCard = ({ user }) => {
   const { about, photourl, firstName, lastName, gender, age } = user;
-  console.log(user);
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-xl">

@@ -23,7 +23,7 @@ const Body = () => {
       if (err.response?.status === 401) {
         navigate("/login");
       } else {
-        navigate("/error");
+        console.error("something went wrong");
       }
       console.error(err);
     }
