@@ -47,10 +47,14 @@ const Connections = () => {
               <div className="card-body">
                 <h2 className="card-title ">{firstName + " " + lastName}</h2>
 
-                <p className="font-normal text-base text-start ">{age + ", " + gender}</p>
+                <p className="font-normal text-base text-start ">
+                  {age + ", " + gender}
+                </p>
                 <p className="font-normal text-base text-start">{about}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">View Profile</button>
+                  <button className="btn btn-outline btn-primary">
+                    View Profile
+                  </button>
                 </div>
               </div>
             </div>

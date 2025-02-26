@@ -7,6 +7,7 @@ import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import UserCard from "./components/UserCard";
 import Connections from "./components/Connections";
+import ConnectionRequest from "./components/ConnectionRequest";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
               <Route path="/feed" element={<Feed />} />
               <Route path="/usercard" element={<UserCard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/connections" element={<Connections/>} />
+              <Route path="/connections" element={<Connections />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/requests" element={<ConnectionRequest />} />
             </Route>
           </Routes>
         </BrowserRouter>
