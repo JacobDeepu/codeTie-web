@@ -5,8 +5,13 @@ const connectionRequestSlice = createSlice({
   initialState: [],
   reducers: {
     addConnectionRequest: (state, action) => action.payload,
+    removeConnectionRequest: (state, action) => {
+      const newArray = state.filter((r) => r._id !== action.payload);
+      return newArray;
+    },
   },
 });
 
-export const { addConnectionRequest } = connectionRequestSlice.actions;
+export const { addConnectionRequest, removeConnectionRequest } =
+  connectionRequestSlice.actions;
 export default connectionRequestSlice.reducer;

@@ -2,7 +2,10 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addConnectionRequest } from "../utils/connectionRequestSlice";
+import {
+  addConnectionRequest,
+  removeConnectionRequest,
+} from "../utils/connectionRequestSlice";
 
 const ConnectionRequest = () => {
   const connectionRequests = useSelector((store) => store.requests) ?? [];
@@ -17,13 +20,30 @@ const ConnectionRequest = () => {
       console.error(error.message);
     }
   };
+  const removeConnections = async (status, _id) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeConnectionRequest(_id));
+      console.log(res);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   useEffect(() => {
     fetchConnections();
   }, []);
 
   if (connectionRequests.length === 0)
-    return <h1>No Connection Request Recieved</h1>;
+    return (
+      <h1 className="text-center my-10 font-bold text-2xl">
+        No Connection Request Recieved
+      </h1>
+    );
   return (
     <div className="flex justify-center">
       <div className=" lg:flex    lg:justify-center flex-col">
@@ -55,10 +75,22 @@ const ConnectionRequest = () => {
                 </p>
                 <p className="font-normal text-base text-start">{about}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-outline btn-success">
+                  <button
+                    className="btn btn-outline btn-success"
+                    onClick={() =>
+                      removeConnections("accepted", connectionRequest._id)
+                    }
+                  >
                     Accept
                   </button>
-                  <button className="btn btn-outline btn-error">Reject</button>
+                  <button
+                    className="btn btn-outline btn-error"
+                    onClick={() =>
+                      removeConnections("rejected", connectionRequest._id)
+                    }
+                  >
+                    Reject
+                  </button>
                 </div>
               </div>
             </div>
