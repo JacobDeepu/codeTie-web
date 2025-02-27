@@ -26,6 +26,13 @@ const Feed = () => {
       handleFeed();
     }
   }, []);
+  if (!feed) return;
+  if (feed.length === 0)
+    return (
+      <h1 className="text-center my-10 font-bold text-2xl">
+        No New User Found
+      </h1>
+    );
   return (
     <div>
       {feed.length > 0 ? (

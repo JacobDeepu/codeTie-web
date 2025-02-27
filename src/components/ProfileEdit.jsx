@@ -121,6 +121,7 @@ const ProfileEdit = ({ user }) => {
         <div className="md:mb-0">
           <UserCard
             user={{ firstName, lastName, age, gender, about, photourl }}
+
           />
         </div>
       </div>

@@ -2,7 +2,6 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { removeFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
@@ -22,14 +21,16 @@ const UserCard = ({ user }) => {
       console.error(err.message);
     }
   };
-  useEffect(() => {
-    sendRequest();
-  }, []);
+
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center  my-10">
       <div className="card bg-base-300 w-96 shadow-xl">
         <figure>
-          <img src={photourl} alt="Photo of User" />
+          <img
+            className=" w-96 h-56 object-cover object-center "
+            src={photourl}
+            alt="Photo of User"
+          />
         </figure>
         <div className="card-body ">
           <h2 className="card-title">

@@ -6,8 +6,11 @@ import { useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [email, setEmail] = useState("gazi@gmail.com");
-  const [password, setPassword] = useState("Gazi@123");
+  const [email, setEmail] = useState("sredha@gmail.com");
+  const [password, setPassword] = useState("Sredha@123");
+  const [firstName, setFirstName] = useState("Sredha");
+  const [lastName, setLastName] = useState("Shivakumar");
+  const [signUp, setSignUp] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,12 +37,66 @@ const Login = () => {
     }
   };
 
+  const handleSignUp = async () => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "signup",
+        { firstName, lastName, email, password },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res.data));
+      setSignUp(false)
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title justify-center">Login</h2>
+          <h2 className="card-title justify-center">
+            {signUp ? "Sign Up" : "Login"}
+          </h2>
           <div>
+            {signUp && (
+              <>
+                <label className="input input-bordered flex items-center my-5 gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4 opacity-70"
+                  >
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                  </svg>
+                  <input
+                    value={firstName}
+                    type="text"
+                    className="grow"
+                    placeholder="First Name"
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </label>
+                <label className="input input-bordered flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4 opacity-70"
+                  >
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                  </svg>
+                  <input
+                    value={lastName}
+                    type="text"
+                    className="grow"
+                    placeholder="Last Name"
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </label>
+              </>
+            )}
             <label className="input input-bordered flex items-center gap-2 my-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,10 +141,21 @@ const Login = () => {
           </div>
           {error && <p className="text-red-500 text-center">{String(error)}</p>}
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button
+              className="btn btn-primary"
+              onClick={signUp ? handleSignUp : handleLogin}
+            >
+              {signUp ? "Sign Up" : "Login"}
             </button>
           </div>
+          <p
+            className="text-center py-5 cursor-pointer"
+            onClick={() => setSignUp((value) => !value)}
+          >
+            {signUp
+              ? "Already signed up? Login here"
+              : " Don't have an account? Sign up"}
+          </p>
         </div>
       </div>
     </div>
