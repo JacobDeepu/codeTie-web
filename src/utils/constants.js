@@ -1,1 +1,4 @@
-export const BASE_URL = "https://codetie.onrender.com/";
+export const BASE_URL =
+  location.hostname === "localhost"
+    ? "https://codetie.onrender.com/"
+    : "http://localhost:5000/";
