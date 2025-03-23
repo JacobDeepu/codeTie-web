@@ -1,5 +1,5 @@
 import Body from "./components/Body";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import appStore from "./utils/appStore";
 import { Provider } from "react-redux";
@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import UserCard from "./components/UserCard";
 import Connections from "./components/Connections";
 import ConnectionRequest from "./components/ConnectionRequest";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/connections" element={<Connections />} />
               <Route path="/login" element={<Login />} />
               <Route path="/requests" element={<ConnectionRequest />} />
+              <Route path="/chat/:targetId" element={<Chat />} />
             </Route>
           </Routes>
         </BrowserRouter>
